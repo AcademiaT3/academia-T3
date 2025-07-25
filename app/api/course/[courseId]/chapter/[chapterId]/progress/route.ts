@@ -2,9 +2,12 @@ import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-export async function PATCH(req: Request, event: any) {
+export async function PATCH(
+  req: Request,
+  { params }: { params: { courseId: string; chapterId: string } }
+) {
   const { userId } = await auth();
-  const { courseId, chapterId } = event.params;  // CORRECCIÓN: params viene de event.params
+  const { courseId, chapterId } = params;
   const { isCompleted } = await req.json();
 
   try {
