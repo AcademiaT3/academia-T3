@@ -2,13 +2,9 @@ import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-// CAMBIO AQUÍ: firma corregida para Next.js 15
-export async function PATCH(
-  req: Request,
-  { params }: { params: { courseId: string; chapterId: string } }
-) {
+export async function PATCH(req: Request, event: any) {
   const { userId } = await auth();
-  const { courseId, chapterId } = params;
+  const { courseId, chapterId } = event.params;  // CORRECCIÓN: params viene de event.params
   const { isCompleted } = await req.json();
 
   try {
