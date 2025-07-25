@@ -4,10 +4,10 @@ import { NextResponse } from "next/server";
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { courseId: string; chapterId: string } }
+  context: { params: Record<string, string> }
 ) {
   const { userId } = await auth();
-  const { courseId, chapterId } = params;
+  const { courseId, chapterId } = context.params;
   const { isCompleted } = await req.json();
 
   try {
